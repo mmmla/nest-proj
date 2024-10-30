@@ -1,0 +1,9 @@
+###
+
+POST http://localhost:3001/user/addUser
+Content-Type : application/json
+
+{
+    "name":"111",
+    "pwd":"111"
+}
