@@ -10,9 +10,8 @@ export class ResponseInterceptor<T> implements NestInterceptor{
         return next.handle().pipe(map(data=>{
             return {
                 data,
-                status:200,
-                message:'成功',
-                succecc:true
+                // message:'请求成功',
+                // succecc:true
             }
         }))
     }

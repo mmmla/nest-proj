@@ -25,7 +25,10 @@ async function bootstrap() {
 
   app.useGlobalInterceptors(new ResponseInterceptor())
 
+  //全局校验Dto文件
   app.useGlobalPipes(new ValidationPipe())
+
+  // app.useGlobalGuards(new LoginGuard())
 
   await app.listen(3001);
 }

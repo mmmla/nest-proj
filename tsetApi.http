@@ -1,9 +1,23 @@
 ###
 
-POST http://localhost:3001/user/addUser
+POST http://localhost:3001/login/addAdminUser
 Content-Type : application/json
 
 {
-    "name":"111",
-    "pwd":"111"
+    "account":"lm",
+    "password":"111"
 }
+
+###
+
+
+POST http://localhost:3001/login
+Content-Type : application/json
+Authorization : Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJsb…xMDh9.90fms4tRPwbmGkTBGPYoSBcT9MLY82QZRXIzCXp_5Y8
+Cookie: xl.session=s%3AcQ82oeE3mpZUlSTWWZFFZQcacYEBtUWd.lW8jbYnlJ0aNXDDCDlqNAG4SDPAbKzBLwf85zMUbxlI
+{
+    "account":"lm",
+    "password":"111",
+    "checkCode":"zojY"
+}
+

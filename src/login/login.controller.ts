@@ -1,14 +1,15 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, Req, Session, Res } from '@nestjs/common';
 import { LoginService } from './login.service';
 import { CreateLoginDto } from './dto/create-login.dto';
-import { UpdateLoginDto } from './dto/update-login.dto';
+import { SignInDto } from './dto/sign-in.dto';
 import * as svgCapTcha from 'svg-captcha'
+import { Public } from 'src/common/constants';
 
 @Controller('login')
 export class LoginController {
   constructor(private readonly loginService: LoginService) { }
 
-
+  @Public()
   @Get('code')
   createCode(@Req() req, @Res() res, @Session() session) {
     const Captcha = svgCapTcha.create({
@@ -26,11 +27,19 @@ export class LoginController {
     res.send(Captcha.data)
   }
 
-  @Post()
-  login( @Body() user:CreateLoginDto, @Session() session) {
 
-    // console.log(user);
-    return this.loginService.login(user,session.code)
+  //登录
+  @Public()
+  @Post()
+  login(@Body() user: SignInDto, @Session() session) {
+    return this.loginService.login(user, session.code)
+  }
+
+  //注册新用户
+  @Public()
+  @Post('/addAdminUser')
+  signUp(@Body() CreateLoginDto: CreateLoginDto,@Session() session) {
+    return this.loginService.create(CreateLoginDto,session.code)
   }
 
   @Get()
@@ -44,7 +53,7 @@ export class LoginController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateLoginDto: UpdateLoginDto) {
+  update(@Param('id') id: string, @Body() updateLoginDto: SignInDto) {
     return this.loginService.update(+id, updateLoginDto);
   }
 
