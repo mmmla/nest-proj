@@ -6,6 +6,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { BcryptService } from 'src/common/bcrypt';
 import { JwtService } from '@nestjs/jwt';
+import { jwtConstants, Public } from 'src/common/constants';
 
 @Injectable()
 export class LoginService {
@@ -14,19 +15,19 @@ export class LoginService {
   ) { }
 
   //创建管理员账户
-  async create(createLoginDto: CreateLoginDto, code: any) {
-    const {account, password,checkCode } = createLoginDto
+  async create(createLoginDto: CreateLoginDto, code: String) {
+    const { account, password, checkCode } = createLoginDto
     if (code.toLowerCase() != checkCode.toLowerCase()) {
       return {
         status: 'error',
         message: '验证码错误'
       }
     }
-    const res=await this.loginUser.findOne({where:{account:account}})
-    if(res){
+    const res = await this.loginUser.findOne({ where: { account: account } })
+    if (res) {
       return {
         status: 'error',
-        message:'账号已存在'
+        message: '账号已存在'
       }
     }
 
@@ -49,8 +50,7 @@ export class LoginService {
   //登录账号
   async login(user: any, code: String) {
     const { account, password, checkCode } = user
-
-
+    
     try {
       if (code.toLowerCase() != checkCode.toLowerCase()) {
         return {
@@ -75,6 +75,15 @@ export class LoginService {
     } catch (e) {
       throw new Error(e)
     }
+  }
+
+  async verifyToken(token: string) {
+    try {
+      await this.jwtService.verifyAsync(token, { secret: jwtConstants.secret })
+    } catch (error) {
+      return false
+    }
+    return true
   }
 
   findAll() {

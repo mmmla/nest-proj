@@ -14,10 +14,15 @@ Content-Type : application/json
 POST http://localhost:3001/login
 Content-Type : application/json
 Authorization : Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJsb…xMDh9.90fms4tRPwbmGkTBGPYoSBcT9MLY82QZRXIzCXp_5Y8
-Cookie: xl.session=s%3AcQ82oeE3mpZUlSTWWZFFZQcacYEBtUWd.lW8jbYnlJ0aNXDDCDlqNAG4SDPAbKzBLwf85zMUbxlI
+Cookie: xl.session=s%3A5KSGtYzWtUgNupAKnmAMllniz8a0a3G3.hzN01w6ogsq7oRCQ4t0zj6KbI%2BT0QtlbNhjgrlIDygw
 {
     "account":"lm",
     "password":"111",
-    "checkCode":"zojY"
+    "checkCode":"Oaz3"
 }
 
+###
+
+GET http://localhost:3001/login/verifyToken
+Content-Type : application/json
+Authorization : Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjMiLCJwYXNzd29yZCI6IjEyMyIsImlhdCI6MTczMjQ0OTE1NCwiZXhwIjoxNzMyNDUwMzU0fQ.keORknJH0ZgKv6R45dMcHPCp_zWb3cWxcC9bw5E91Yo

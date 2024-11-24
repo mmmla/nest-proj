@@ -7,7 +7,7 @@ import { Public } from 'src/common/constants';
 
 @Controller('login')
 export class LoginController {
-  constructor(private readonly loginService: LoginService) { }
+  constructor(private readonly loginService: LoginService) {}
 
   @Public()
   @Get('code')
@@ -32,6 +32,8 @@ export class LoginController {
   @Public()
   @Post()
   login(@Body() user: SignInDto, @Session() session) {
+    console.log(session);
+    
     return this.loginService.login(user, session.code)
   }
 
@@ -40,6 +42,13 @@ export class LoginController {
   @Post('/addAdminUser')
   signUp(@Body() CreateLoginDto: CreateLoginDto,@Session() session) {
     return this.loginService.create(CreateLoginDto,session.code)
+  }
+
+  //验证token是否合法
+  @Public()
+  @Get('/verifyToken')
+  checkToken(@Req() req){
+    return this.loginService.verifyToken(req.query.data)
   }
 
   @Get()
